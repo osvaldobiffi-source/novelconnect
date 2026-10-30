@@ -1,0 +1,19 @@
+name: Nóvel Connect - gerar instaladores
+
+# Rode manualmente em: Actions > "Nóvel Connect - gerar instaladores" > Run workflow
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    uses: ./.github/workflows/flutter-build.yml
+    secrets: inherit
+    with:
+      upload-artifact: true
+      # Uma release por versão (v1.5.3, v1.5.4, ...). O aplicar_branding.py troca
+      # 1.5.3 pelo valor de VERSAO_NOVEL. Rodar de novo a mesma versão
+      # substitui os arquivos dela em vez de criar outra release.
+      upload-tag: "v1.5.3"
